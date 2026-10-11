@@ -7,7 +7,6 @@ import 'package:geolocator/geolocator.dart';
 import '../../error/error_code.dart';
 import '../../error/exceptions.dart';
 import '../../error/failures.dart';
-import '../../keys.dart';
 import '../model/geocoding.dart';
 
 /// Function to get current position of user
