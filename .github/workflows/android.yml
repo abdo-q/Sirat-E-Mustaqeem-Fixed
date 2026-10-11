@@ -1,23 +1,35 @@
 name: Build APK
+
 on:
   push:
     branches:
       - master
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-java@v3
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v5
         with:
-          distribution: 'temurin'
+          distribution: temurin
           java-version: '17'
       - uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.27.0'
-      - run: flutter pub get
-      - run: flutter build apk --release --android-skip-build-dependency-validation
+          channel: stable
+          cache: true
+      - name: Show Flutter and Dart versions
+        run: flutter --version
+      - name: Get dependencies
+        run: flutter pub get
+      - name: Build release APK
+        run: flutter build apk --release --android-skip-build-dependency-validation
       - uses: actions/upload-artifact@v4
         with:
-          name: app-release
+          name: sirat-e-mustaqeem-app-release
           path: build/app/outputs/flutter-apk/app-release.apk
+          if-no-files-found: error
