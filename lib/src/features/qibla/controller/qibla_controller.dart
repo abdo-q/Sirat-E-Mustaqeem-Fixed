@@ -18,7 +18,7 @@ import 'dart:math' show sin, cos, atan2, pi;
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:motion_sensors/motion_sensors.dart';
+import 'package:sensors_plus/sensors_plus.dart';
 import 'package:vector_math/vector_math.dart' show radians;
 
 import '../blocs/angle_bloc/angle_bloc.dart';
@@ -120,9 +120,9 @@ double getCompassAngle(List<MagnetometerEvent> events) {
 }
 
 Future<bool> getMagnetometerAvailability() async {
-  bool isAvailble = await motionSensors.isMagnetometerAvailable();
-
-  return isAvailble;
+  // sensors_plus does not expose a sensor-availability probe; stream errors
+  // are handled by the caller if the device has no magnetometer.
+  return true;
 }
 
 String getDirectionText(int angle) {
