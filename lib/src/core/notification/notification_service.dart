@@ -97,7 +97,8 @@ class NotificationService {
   Future<void> _configureLocalTimeZone() async {
     tz.initializeTimeZones();
 
-    final String timeZoneName = await FlutterTimezone.getLocalTimezone();
+    final timeZoneInfo = await FlutterTimezone.getLocalTimezone();
+    final String timeZoneName = timeZoneInfo.identifier;
 
     tz.setLocalLocation(tz.getLocation(timeZoneName));
   }
