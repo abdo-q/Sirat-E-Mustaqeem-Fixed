@@ -27,9 +27,9 @@ jobs:
       - name: Get dependencies
         run: flutter pub get
       - name: Build release APK
-        run: flutter build apk --release --split-per-abi --android-skip-build-dependency-validation
+        run: flutter build apk --release --android-skip-build-dependency-validation
       - uses: actions/upload-artifact@v4
         with:
-          name: sirat-e-mustaqeem-app-release-split-per-abi
-          path: build/app/outputs/flutter-apk/app-*-release.apk
+          name: sirat-e-mustaqeem-app-universal-release
+          path: build/app/outputs/flutter-apk/app-release.apk
           if-no-files-found: error
